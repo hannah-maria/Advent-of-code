@@ -1,0 +1,75 @@
+DAY 1 PART 1
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath> 
+
+using namespace std;
+
+int main(){
+    int sum=0;
+    vector<int> left_list;
+    vector<int> right_list;
+
+    int left;
+    int right;
+    while(cin >> left >> right){
+        left_list.push_back(left);
+        right_list.push_back(right);
+    }
+
+    sort(left_list.begin(), left_list.end());
+    sort(right_list.begin(), right_list.end());
+
+    for(int i=0;i<left_list.size();i++){
+        int temp_sum=abs(left_list[i]-right_list[i]);
+        sum+=temp_sum;
+    }
+    cout << sum;
+    return 0;
+}
+
+DAY 1 PART 2
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath> 
+#include <unordered_map>
+
+using namespace std;
+
+int freqCount(vector<int> arr1, vector<int> arr2){
+    int sum=0;
+    unordered_map<int,int> freqmap;
+    for(int num: arr1){
+        freqmap[num]++;
+    }
+
+    for(int num: arr2){
+        if(freqmap[num]!=0){
+            int prod=num*freqmap[num];
+            sum+=prod;
+        }
+    }
+    return sum;
+}
+
+int main(){
+    vector<int> list1;
+    vector<int> list2;
+
+    int left;
+    int right;
+    while(cin >> left >> right){
+        list1.push_back(left);
+        list2.push_back(right);
+    }
+
+    int result=freqCount(list1, list2);
+    cout << result;
+    return 0;
+}
+
+
